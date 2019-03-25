@@ -50,7 +50,7 @@ public class MonsterIndividualController : MonoBehaviour
                 moveChanceX = Random.Range(-1, 1);
                 moveChanceY = Random.Range(-1, 1);
             }
-            Debug.Log(moveChanceX + " , " + moveChanceY);
+
             monsterRB.velocity = new Vector2(moveChanceX * originalMonsterSpeed, moveChanceY * originalMonsterSpeed);
             monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
         }
