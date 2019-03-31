@@ -2,7 +2,8 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Twitch/TwitchClient.cs">
     <Files>
       <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="75" Column="20" />
-      <File FileName="Assets/Scripts/Twitch/TwitchClient.cs" Line="6" Column="1" />
+      <File FileName="Assets/Scripts/Twitch/TwitchClient.cs" Line="16" Column="5" />
+      <File FileName="Assets/Scripts/Twitch/Secrets.cs" Line="8" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
