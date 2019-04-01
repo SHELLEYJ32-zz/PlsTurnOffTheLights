@@ -9,6 +9,7 @@ public class TwitchClient : MonoBehaviour
     public string channelName = "shelleyj16";
     private float helpTimer;
     private bool helpFlag;
+    private MonsterTwitchListener twitchListener;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class TwitchClient : MonoBehaviour
         client.OnMessageReceived += CommandListen; //Set up Trigger to fire whenever a message is sent in twitch chat
 
         client.Connect(); //connect the bot to the twitch chat
+
+        twitchListener = GetComponent<MonsterTwitchListener>();
 
         helpTimer = 31.0f;
     }
@@ -54,7 +57,7 @@ public class TwitchClient : MonoBehaviour
             || e.ChatMessage.Message == "!Left" || e.ChatMessage.Message == "!left" || e.ChatMessage.Message == "!Right" || e.ChatMessage.Message == "!right"
             || e.ChatMessage.Message == "!u" || e.ChatMessage.Message == "!d" || e.ChatMessage.Message == "!l" || e.ChatMessage.Message == "!r")
         {
-            //catController.ChatMoveCommand(e.ChatMessage.Message, e.ChatMessage.Username);
+            twitchListener.SelectRandomMonster(e.ChatMessage.Message, e.ChatMessage.Username);
         }
     }
 
@@ -62,6 +65,6 @@ public class TwitchClient : MonoBehaviour
     private void Help()
     {
         client.SendMessage(client.JoinedChannels[0], "How to play with the streamer? Control monsters by typing in !Up, !Down, !Left, !Right. " +
-        "You can also use !u, !d, !l, !r. This message will not prompt again within 30 second.");
+        "You can also use !u, !d, !l, !r. This message will not prompt again within 30 seconds.");
     }
 }

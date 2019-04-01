@@ -1,29 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterIndividualController : MonoBehaviour
 {
     public float originalMonsterSpeed = 1.5f;
-    public float twitchMonsterSpeed;
-    public float twitchEffectiveTime;
+    public float twitchMonsterSpeed = 4.0f;
+    public float twitchEffectiveTime = 0.5f;
     public float maxLightIntensity;
     public float tempDisappearTime;
 
     private Rigidbody2D monsterRB;
-    private float directionChangeTimer = 3.0f;
-    private float localTimer;
+    private float driftChangeTimer = 3.0f;
+    private float driftLocalTimer;
+    private bool twitchFlag;
+    private float twicthLocalTimer;
+    private GameObject twitchNamePrefab;
+    private GameObject twitchNameDisplay;
 
     void Start()
     {
         monsterRB = GetComponent<Rigidbody2D>();
-        localTimer = directionChangeTimer;
+        driftLocalTimer = driftChangeTimer;
+        twitchFlag = false;
+        twitchNamePrefab = Resources.Load("TwitchName") as GameObject;
     }
 
     void FixedUpdate()
     {
 
-        Drift();
+        if (!twitchFlag)
+        {
+            Drift();
+        }
+        else
+        {
+            if (twicthLocalTimer > 0)
+            {
+                twicthLocalTimer -= Time.deltaTime;
+                twitchNameDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+            }
+            else
+            {
+                twitchFlag = false;
+                twitchNameDisplay.SetActive(false);
+                //if twitch commond controls the monster, reset drift timer
+                driftLocalTimer = driftChangeTimer;
+                monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
+            }
+
+        }
 
     }
 
@@ -36,9 +62,9 @@ public class MonsterIndividualController : MonoBehaviour
     //drift randomly within dark space
     private void Drift()
     {
-        if (localTimer < 0)
+        if (driftLocalTimer < 0)
         {
-            localTimer = directionChangeTimer;
+            driftLocalTimer = driftChangeTimer;
             int moveChanceX = Random.Range(-1, 2);
             int moveChanceY = Random.Range(-1, 2);
             //float moveMagnitudeX = Random.Range(0, 2);
@@ -47,8 +73,8 @@ public class MonsterIndividualController : MonoBehaviour
             //prevent monster from not moving
             while (moveChanceX == 0 && moveChanceY == 0)
             {
-                moveChanceX = Random.Range(-1, 1);
-                moveChanceY = Random.Range(-1, 1);
+                moveChanceX = Random.Range(-1, 2);
+                moveChanceY = Random.Range(-1, 2);
             }
 
             monsterRB.velocity = new Vector2(moveChanceX * originalMonsterSpeed, moveChanceY * originalMonsterSpeed);
@@ -56,8 +82,14 @@ public class MonsterIndividualController : MonoBehaviour
         }
         else
         {
-            localTimer -= Time.deltaTime;
+            driftLocalTimer -= Time.deltaTime;
         }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Teleport(collision);
 
     }
 
@@ -85,11 +117,6 @@ public class MonsterIndividualController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Teleport(collision);
-
-    }
 
     //follow the player within a certain radius
     private void Chase() { }
@@ -103,12 +130,44 @@ public class MonsterIndividualController : MonoBehaviour
     //move based on twitch command
     public void TwitchMove(string direction)
     {
+        twitchFlag = true;
+        twicthLocalTimer = twitchEffectiveTime;
 
+        int moveChanceX = 0;
+        int moveChanceY = 0;
+
+        if (direction == "!Up" || direction == "!up" || direction == "!u")
+        {
+            moveChanceX = 0;
+            moveChanceY = 1;
+        }
+        else if (direction == "!Down" || direction == "!down" || direction == "!d")
+        {
+            moveChanceX = 0;
+            moveChanceY = -1;
+        }
+        else if (direction == "!Left" || direction == "!left" || direction == "!l")
+        {
+            moveChanceX = -1;
+            moveChanceY = 0;
+        }
+        else if (direction == "!Right" || direction == "!right" || direction == "!r")
+        {
+            moveChanceX = 1;
+            moveChanceY = 0;
+        }
+
+        monsterRB.velocity = new Vector2(moveChanceX * twitchMonsterSpeed, moveChanceY * twitchMonsterSpeed);
+        //Debug.Log("twitch command received");
     }
 
     //display twitch name when command received
     public void DisplayTwitchName(string name)
     {
-
+        twitchNameDisplay = Instantiate(twitchNamePrefab);
+        twitchNameDisplay.GetComponent<TwitchNameController>().Display(name);
+        twitchNameDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+        twitchNameDisplay.SetActive(true);
+        //Debug.Log("name received");
     }
 }

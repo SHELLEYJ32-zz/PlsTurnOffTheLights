@@ -691,6 +691,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 260582294092839761, guid: 0969e694e357946cca186dd8f325fc6a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4048630819241640294, guid: 0969e694e357946cca186dd8f325fc6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -704,7 +709,7 @@ PrefabInstance:
     - target: {fileID: 4048630819241640294, guid: 0969e694e357946cca186dd8f325fc6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.14
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4048630819241640294, guid: 0969e694e357946cca186dd8f325fc6a,
         type: 3}
@@ -771,8 +776,19 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8602615780738528055, guid: 0969e694e357946cca186dd8f325fc6a,
+        type: 3}
+      propertyPath: twitchNameDisplay
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338103869586045447, guid: 0969e694e357946cca186dd8f325fc6a,
+        type: 3}
+      propertyPath: twitchEffectiveTime
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4754094823818501296, guid: 0969e694e357946cca186dd8f325fc6a, type: 3}
+    - {fileID: 8602615780738528055, guid: 0969e694e357946cca186dd8f325fc6a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0969e694e357946cca186dd8f325fc6a, type: 3}
 --- !u!1001 &422795041
 PrefabInstance:
@@ -893,6 +909,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pairedSwitch: {fileID: 1580363666}
+--- !u!1 &432204171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 432204174}
+  - component: {fileID: 432204173}
+  - component: {fileID: 432204172}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &432204172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432204171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &432204173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432204171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &432204174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432204171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504052470
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,6 +985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 504052472}
   - component: {fileID: 504052471}
+  - component: {fileID: 504052473}
   m_Layer: 0
   m_Name: TwitchController
   m_TagString: Untagged
@@ -937,6 +1020,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &504052473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504052470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11448aa1d82c84ead8afdee78742a97e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &514034401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1084,7 +1179,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.530955
+  orthographic size: 10.175729
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1126,23 +1221,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 417765448}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &535557683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535557681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8936f8095cff4d26af51ba8f3f41b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalMonsterSpeed: 1.5
-  twitchMonsterSpeed: 0
-  twitchEffectiveTime: 0
-  maxLightIntensity: 0
-  tempDisappearTime: 0
 --- !u!58 &535557684
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3215,23 +3293,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &260582294092839763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260582294092839761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8936f8095cff4d26af51ba8f3f41b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalMonsterSpeed: 1.5
-  twitchMonsterSpeed: 0
-  twitchEffectiveTime: 0
-  maxLightIntensity: 0
-  tempDisappearTime: 0
 --- !u!50 &260582294092839764
 Rigidbody2D:
   serializedVersion: 4
@@ -3545,8 +3606,19 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8602615780738528055, guid: 0969e694e357946cca186dd8f325fc6a,
+        type: 3}
+      propertyPath: twitchNameDisplay
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338103869586045447, guid: 0969e694e357946cca186dd8f325fc6a,
+        type: 3}
+      propertyPath: twitchEffectiveTime
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4754094823818501296, guid: 0969e694e357946cca186dd8f325fc6a, type: 3}
+    - {fileID: 8602615780738528055, guid: 0969e694e357946cca186dd8f325fc6a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0969e694e357946cca186dd8f325fc6a, type: 3}
 --- !u!4 &3613911919548087177
 Transform:

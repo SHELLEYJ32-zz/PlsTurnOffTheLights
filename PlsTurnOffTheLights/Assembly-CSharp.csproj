@@ -63,9 +63,11 @@
     <Compile Include="Assets\Scripts\Lights\LightController.cs" />
     <Compile Include="Assets\Scripts\Lights\SwitchController.cs" />
     <Compile Include="Assets\Scripts\Monsters\MonsterIndividualController.cs" />
+    <Compile Include="Assets\Scripts\Monsters\MonsterTwitchListener.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Twitch\Secrets.cs" />
     <Compile Include="Assets\Scripts\Twitch\TwitchClient.cs" />
+    <Compile Include="Assets\Scripts\Twitch\TwitchNameController.cs" />
     <Reference Include="Cinemachine">
       <HintPath>/Users/ShelleyJ16/PlsTurnOffTheLights/PlsTurnOffTheLights/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
