@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TwitchLib.Unity;          //import libraries from TwitchLib so we can talk to the twitch API
+﻿using TwitchLib.Unity;          //import libraries from TwitchLib so we can talk to the twitch API
 using TwitchLib.Client.Models;
 using UnityEngine;
 
@@ -8,28 +6,27 @@ public class TwitchClient : MonoBehaviour
 {
 
     public Client client;
-    public string channelName;
-    public GameObject CatControllerObject;
+    public string channelName = "shelleyj16";
     private float helpTimer;
     private bool helpFlag;
 
-    //private CatController catController;
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    channelName = Global.Instance.twitchName; //get the name of the twitch channel as set in the options menu
+    void Start()
+    {
+        Application.runInBackground = true;
 
-    //    ConnectionCredentials credentials = new ConnectionCredentials("mrtwitchboto", Secrets.Instance.accessToken); //set up the twitch bots credentials
-    //    client = new Client();
-    //    client.Initialize(credentials, channelName); //Initialize the Bot
+        //change
+        //channelName = Global.Instance.twitchName; //get the name of the twitch channel as set in the options menu
 
-    //    client.OnMessageReceived += CommandListen; //Set up Trigger to fire whenever a message is sent in twitch chat
+        ConnectionCredentials credentials = new ConnectionCredentials("gatekeeperlightsbot", Secrets.accessToken); //set up the twitch bots credentials
+        client = new Client();
+        client.Initialize(credentials, channelName); //Initialize the Bot
 
-    //    client.Connect(); //connect the bot to the twitch chat
+        client.OnMessageReceived += CommandListen; //Set up Trigger to fire whenever a message is sent in twitch chat
 
-    //    catController = CatControllerObject.GetComponent<CatController>(); //set up the cat controller
-    //    helpTimer = 40.0f; //set the delay between bot sending help messages to avoid getting banned
-    //}
+        client.Connect(); //connect the bot to the twitch chat
+
+        helpTimer = 31.0f;
+    }
 
     void Update()
     {
@@ -42,12 +39,13 @@ public class TwitchClient : MonoBehaviour
                 helpTimer = 40.0f;
             }
         }
+
     }
 
     //Checks to see if messages in twitch chat are commands, and if so, executes them
     private void CommandListen(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
     {
-        if (e.ChatMessage.Message == "!help" && helpFlag == false) //sends help message
+        if (e.ChatMessage.Message == "!help" && !helpFlag) //sends help message
         {
             Help();
             helpFlag = true;
@@ -58,22 +56,12 @@ public class TwitchClient : MonoBehaviour
         {
             //catController.ChatMoveCommand(e.ChatMessage.Message, e.ChatMessage.Username);
         }
-        /*else
-        {
-            client.SendMessage(client.JoinedChannels[0],"Command not recognized, please use !Help to get the list of commands.");
-        }*/
     }
-
-    /*private void ChatListen(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
-    {
-        Debug.Log("Someone just sent a message in Twitch Chat");
-        Debug.Log(e.ChatMessage.Username + ": " + e.ChatMessage.Message);
-    }*/
 
     //the help message
     private void Help()
     {
-        client.SendMessage(client.JoinedChannels[0], "Welcome to Herding Chats! You can use chat commands to help the cats avoid the player!" +
-            " The valid commands are: !Up, !Down, !Left, !Right. Alternatively, you can use !u, !d, !l, !r");
+        client.SendMessage(client.JoinedChannels[0], "How to play with the streamer? Control monsters by typing in !Up, !Down, !Left, !Right. " +
+        "You can also use !u, !d, !l, !r. This message will not prompt again within 30 second.");
     }
 }
