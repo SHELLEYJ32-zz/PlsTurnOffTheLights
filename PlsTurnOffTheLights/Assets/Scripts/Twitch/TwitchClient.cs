@@ -53,18 +53,16 @@ public class TwitchClient : MonoBehaviour
             Help();
             helpFlag = true;
         }
-        else if (e.ChatMessage.Message == "!Up" || e.ChatMessage.Message == "!up" || e.ChatMessage.Message == "!Down" || e.ChatMessage.Message == "!down"
-            || e.ChatMessage.Message == "!Left" || e.ChatMessage.Message == "!left" || e.ChatMessage.Message == "!Right" || e.ChatMessage.Message == "!right"
-            || e.ChatMessage.Message == "!u" || e.ChatMessage.Message == "!d" || e.ChatMessage.Message == "!l" || e.ChatMessage.Message == "!r")
+        else if (e.ChatMessage.Message == "!u" || e.ChatMessage.Message == "!d" || e.ChatMessage.Message == "!l" || e.ChatMessage.Message == "!r")
         {
-            twitchListener.SelectRandomMonster(e.ChatMessage.Message, e.ChatMessage.Username);
+            twitchListener.CollectVotes(e.ChatMessage.Message);
         }
     }
 
     //the help message
     private void Help()
     {
-        client.SendMessage(client.JoinedChannels[0], "How to play with the streamer? Control monsters by typing in !Up, !Down, !Left, !Right. " +
-        "You can also use !u, !d, !l, !r. This message will not prompt again within 30 seconds.");
+        client.SendMessage(client.JoinedChannels[0], "How to play with the streamer? Control monsters by typing in !u, !d, !l, !r." +
+        "This message will not prompt again within 30 seconds.");
     }
 }

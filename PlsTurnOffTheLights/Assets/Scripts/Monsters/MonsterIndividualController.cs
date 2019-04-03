@@ -130,44 +130,48 @@ public class MonsterIndividualController : MonoBehaviour
     //move based on twitch command
     public void TwitchMove(string direction)
     {
-        twitchFlag = true;
-        twicthLocalTimer = twitchEffectiveTime;
+        //if no command is received
+        if (direction != "")
+        {
+            twitchFlag = true;
+            twicthLocalTimer = twitchEffectiveTime;
 
-        int moveChanceX = 0;
-        int moveChanceY = 0;
+            int moveChanceX = 0;
+            int moveChanceY = 0;
 
-        if (direction == "!Up" || direction == "!up" || direction == "!u")
-        {
-            moveChanceX = 0;
-            moveChanceY = 1;
-        }
-        else if (direction == "!Down" || direction == "!down" || direction == "!d")
-        {
-            moveChanceX = 0;
-            moveChanceY = -1;
-        }
-        else if (direction == "!Left" || direction == "!left" || direction == "!l")
-        {
-            moveChanceX = -1;
-            moveChanceY = 0;
-        }
-        else if (direction == "!Right" || direction == "!right" || direction == "!r")
-        {
-            moveChanceX = 1;
-            moveChanceY = 0;
-        }
+            if (direction == "!u")
+            {
+                moveChanceX = 0;
+                moveChanceY = 1;
+            }
+            else if (direction == "!d")
+            {
+                moveChanceX = 0;
+                moveChanceY = -1;
+            }
+            else if (direction == "!l")
+            {
+                moveChanceX = -1;
+                moveChanceY = 0;
+            }
+            else if (direction == "!r")
+            {
+                moveChanceX = 1;
+                moveChanceY = 0;
+            }
 
-        monsterRB.velocity = new Vector2(moveChanceX * twitchMonsterSpeed, moveChanceY * twitchMonsterSpeed);
+            monsterRB.velocity = new Vector2(moveChanceX * twitchMonsterSpeed, moveChanceY * twitchMonsterSpeed);
+        }
         //Debug.Log("twitch command received");
     }
 
-    //display twitch name when command received
-    public void DisplayTwitchName(string name)
-    {
-        twitchNameDisplay = Instantiate(twitchNamePrefab);
-        twitchNameDisplay.GetComponent<TwitchNameController>().Display(name);
-        twitchNameDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
-        twitchNameDisplay.SetActive(true);
-        //Debug.Log("name received");
-    }
+    ////display twitch name when command received
+    //public void DisplayTwitchName(string name)
+    //{
+    //    twitchNameDisplay = Instantiate(twitchNamePrefab);
+    //    twitchNameDisplay.GetComponent<TwitchNameController>().Display(name);
+    //    twitchNameDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+    //    twitchNameDisplay.SetActive(true);
+    //    //Debug.Log("name received");
+    //}
 }
