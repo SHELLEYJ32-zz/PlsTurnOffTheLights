@@ -2,8 +2,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Monsters/MonsterIndividualController.cs">
     <Files>
       <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="17" Column="30" />
-      <File FileName="Assets/Scripts/Monsters/MonsterIndividualController.cs" Line="3" Column="22" />
-      <File FileName="Assets/Scripts/Monsters/MonsterTwitchListener.cs" Line="72" Column="5" />
+      <File FileName="Assets/Scripts/Monsters/MonsterIndividualController.cs" Line="161" Column="14" />
+      <File FileName="Assets/Scripts/Monsters/MonsterTwitchListener.cs" Line="66" Column="30" />
+      <File FileName="Assets/Scripts/Twitch/TwitchClient.cs" Line="31" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -1,5 +1,6 @@
 ﻿using TwitchLib.Unity;          //import libraries from TwitchLib so we can talk to the twitch API
 using TwitchLib.Client.Models;
+using TwitchLib.Client.Events;
 using UnityEngine;
 
 public class TwitchClient : MonoBehaviour
@@ -22,9 +23,9 @@ public class TwitchClient : MonoBehaviour
         client = new Client();
         client.Initialize(credentials, channelName); //Initialize the Bot
 
-        client.OnMessageReceived += CommandListen; //Set up Trigger to fire whenever a message is sent in twitch chat
-
         client.Connect(); //connect the bot to the twitch chat
+        client.OnChatCommandReceived += CommandListen;
+        //client.OnMessageReceived += CommandListen; //Set up Trigger to fire whenever a message is sent in twitch chat
 
         twitchListener = GetComponent<MonsterTwitchListener>();
 
@@ -46,16 +47,18 @@ public class TwitchClient : MonoBehaviour
     }
 
     //Checks to see if messages in twitch chat are commands, and if so, executes them
-    private void CommandListen(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
+    private void CommandListen(object sender, OnChatCommandReceivedArgs e)
     {
-        if (e.ChatMessage.Message == "!help" && !helpFlag) //sends help message
+        if (e.Command.CommandText == "help" && !helpFlag) //sends help message
         {
+            Debug.Log("twitch message: " + e.Command.CommandText);
             Help();
             helpFlag = true;
         }
-        else if (e.ChatMessage.Message == "!u" || e.ChatMessage.Message == "!d" || e.ChatMessage.Message == "!l" || e.ChatMessage.Message == "!r")
+        else if (e.Command.CommandText == "u" || e.Command.CommandText == "d" || e.Command.CommandText == "l" || e.Command.CommandText == "r")
         {
-            twitchListener.CollectVotes(e.ChatMessage.Message);
+            Debug.Log("twitch message: " + e.Command.CommandText);
+            twitchListener.CollectVotes(e.Command.CommandText);
         }
     }
 

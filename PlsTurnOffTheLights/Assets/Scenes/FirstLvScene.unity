@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11448aa1d82c84ead8afdee78742a97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  voteCountdown: 3
 --- !u!1001 &514034401
 PrefabInstance:
   m_ObjectHideFlags: 0

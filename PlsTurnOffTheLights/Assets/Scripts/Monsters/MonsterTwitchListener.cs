@@ -8,7 +8,7 @@ public class MonsterTwitchListener : MonoBehaviour
     private int upVote;
     private int downVote;
 
-    public float voteCountdown = 2.0f;
+    public float voteCountdown = 10.0f;
     private float localTimer;
     private string finalVote;
 
@@ -37,35 +37,40 @@ public class MonsterTwitchListener : MonoBehaviour
         rightVote = 0;
         upVote = 0;
         downVote = 0;
+        finalVote = "";
     }
 
     public void CollectVotes(string direction)
     {
-        if (direction == "!u")
+        if (direction == "u")
             upVote++;
-        else if (direction == "!d")
+        else if (direction == "d")
             downVote++;
-        else if (direction == "!l")
+        else if (direction == "l")
             leftVote++;
-        else if (direction == "!r")
+        else if (direction == "r")
             rightVote++;
 
-        //pick the most vote
-        if (upVote >= downVote && upVote >= leftVote && upVote >= rightVote)
+        //Debug.Log("received: " + direction);
+        if (upVote != 0 || downVote != 0 || leftVote != 0 || rightVote != 0)
         {
-            finalVote = "!u";
-        }
-        else if (downVote >= upVote && downVote >= leftVote && downVote >= rightVote)
-        {
-            finalVote = "!d";
-        }
-        else if (leftVote >= upVote && leftVote >= downVote && leftVote >= rightVote)
-        {
-            finalVote = "!l";
-        }
-        else if (rightVote >= upVote && rightVote >= downVote && rightVote >= leftVote)
-        {
-            finalVote = "!r";
+            //pick the most vote
+            if (upVote >= downVote && upVote >= leftVote && upVote >= rightVote)
+            {
+                finalVote = "u";
+            }
+            else if (downVote >= upVote && downVote >= leftVote && downVote >= rightVote)
+            {
+                finalVote = "d";
+            }
+            else if (leftVote >= upVote && leftVote >= downVote && leftVote >= rightVote)
+            {
+                finalVote = "l";
+            }
+            else if (rightVote >= upVote && rightVote >= downVote && rightVote >= leftVote)
+            {
+                finalVote = "r";
+            }
         }
 
     }
@@ -77,6 +82,6 @@ public class MonsterTwitchListener : MonoBehaviour
         GameObject selectedMonster = monsters[r];
         //Debug.Log(selectedMonster);
         selectedMonster.GetComponent<MonsterIndividualController>().TwitchMove(direction);
-        //selectedMonster.GetComponent<MonsterIndividualController>().DisplayTwitchName(twitchName);
+        selectedMonster.GetComponent<MonsterIndividualController>().TwitchActiveSignal(direction);
     }
 }

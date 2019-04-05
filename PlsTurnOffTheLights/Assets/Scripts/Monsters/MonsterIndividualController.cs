@@ -15,15 +15,16 @@ public class MonsterIndividualController : MonoBehaviour
     private float driftLocalTimer;
     private bool twitchFlag;
     private float twicthLocalTimer;
-    private GameObject twitchNamePrefab;
-    private GameObject twitchNameDisplay;
+    private GameObject signalPrefab;
+    private GameObject signalDisplay;
 
     void Start()
     {
         monsterRB = GetComponent<Rigidbody2D>();
         driftLocalTimer = driftChangeTimer;
         twitchFlag = false;
-        twitchNamePrefab = Resources.Load("TwitchName") as GameObject;
+        signalPrefab = Resources.Load("Signal") as GameObject;
+        signalDisplay = Instantiate(signalPrefab);
     }
 
     void FixedUpdate()
@@ -38,12 +39,12 @@ public class MonsterIndividualController : MonoBehaviour
             if (twicthLocalTimer > 0)
             {
                 twicthLocalTimer -= Time.deltaTime;
-                twitchNameDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+                signalDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
             }
             else
             {
                 twitchFlag = false;
-                twitchNameDisplay.SetActive(false);
+                signalDisplay.SetActive(false);
                 //if twitch commond controls the monster, reset drift timer
                 driftLocalTimer = driftChangeTimer;
                 monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
@@ -139,22 +140,22 @@ public class MonsterIndividualController : MonoBehaviour
             int moveChanceX = 0;
             int moveChanceY = 0;
 
-            if (direction == "!u")
+            if (direction == "u")
             {
                 moveChanceX = 0;
                 moveChanceY = 1;
             }
-            else if (direction == "!d")
+            else if (direction == "d")
             {
                 moveChanceX = 0;
                 moveChanceY = -1;
             }
-            else if (direction == "!l")
+            else if (direction == "l")
             {
                 moveChanceX = -1;
                 moveChanceY = 0;
             }
-            else if (direction == "!r")
+            else if (direction == "r")
             {
                 moveChanceX = 1;
                 moveChanceY = 0;
@@ -165,13 +166,12 @@ public class MonsterIndividualController : MonoBehaviour
         //Debug.Log("twitch command received");
     }
 
-    ////display twitch name when command received
-    //public void DisplayTwitchName(string name)
-    //{
-    //    twitchNameDisplay = Instantiate(twitchNamePrefab);
-    //    twitchNameDisplay.GetComponent<TwitchNameController>().Display(name);
-    //    twitchNameDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
-    //    twitchNameDisplay.SetActive(true);
-    //    //Debug.Log("name received");
-    //}
+    //display twitch name when command received
+    public void TwitchActiveSignal(string text)
+    {
+        signalDisplay.GetComponent<TwitchNameController>().Display(text);
+        signalDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+        signalDisplay.SetActive(true);
+        Debug.Log("final vote: " + text);
+    }
 }

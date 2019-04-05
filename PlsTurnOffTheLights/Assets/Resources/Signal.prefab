@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3750019942897944753}
   - component: {fileID: 3750019942897944752}
   m_Layer: 5
-  m_Name: TwitchName
+  m_Name: Signal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,4 +191,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 111
+  m_Text: 
