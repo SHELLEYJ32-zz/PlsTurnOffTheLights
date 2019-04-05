@@ -51,13 +51,13 @@ public class TwitchClient : MonoBehaviour
     {
         if (e.Command.CommandText == "help" && !helpFlag) //sends help message
         {
-            Debug.Log("twitch message: " + e.Command.CommandText);
+            //Debug.Log("twitch message: " + e.Command.CommandText);
             Help();
             helpFlag = true;
         }
         else if (e.Command.CommandText == "u" || e.Command.CommandText == "d" || e.Command.CommandText == "l" || e.Command.CommandText == "r")
         {
-            Debug.Log("twitch message: " + e.Command.CommandText);
+            //Debug.Log("twitch message: " + e.Command.CommandText);
             twitchListener.CollectVotes(e.Command.CommandText);
         }
     }

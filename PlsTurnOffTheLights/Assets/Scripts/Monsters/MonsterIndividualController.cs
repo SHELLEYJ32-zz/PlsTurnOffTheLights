@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 public class MonsterIndividualController : MonoBehaviour
 {
-    public float originalMonsterSpeed = 1.5f;
-    public float twitchMonsterSpeed = 4.0f;
-    public float twitchEffectiveTime = 0.5f;
+    public float originalMonsterSpeed;
+    public float twitchMonsterSpeed;
+    public float twitchEffectiveTime;
     public float maxLightIntensity;
     public float tempDisappearTime;
+    public CircleCollider2D bodyCollider;
+    public CircleCollider2D attractiveCollider;
 
     private Rigidbody2D monsterRB;
     private float driftChangeTimer = 3.0f;
@@ -25,6 +27,7 @@ public class MonsterIndividualController : MonoBehaviour
         twitchFlag = false;
         signalPrefab = Resources.Load("Signal") as GameObject;
         signalDisplay = Instantiate(signalPrefab);
+        signalDisplay.SetActive(false);
     }
 
     void FixedUpdate()
@@ -90,40 +93,80 @@ public class MonsterIndividualController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Teleport(collision);
+        if (collision.gameObject.tag == "player")
+        {
+            if (bodyCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+                Catch();
+            else if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+                Chase(true);
+        }
+        else
+            Teleport(collision);
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "player")
+        {
+            if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+                Chase(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "player")
+        {
+            if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+                Chase(false);
+        }
 
     }
 
     private void Teleport(Collider2D collision)
     {
-        if (collision.gameObject.tag == "LeftWall")
+        if (bodyCollider.IsTouching(collision))
         {
-            //Debug.Log("left wall");
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x + 14, gameObject.transform.position.y);
-        }
-        else if (collision.gameObject.tag == "RightWall")
-        {
-            //Debug.Log("right wall");
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x - 14, gameObject.transform.position.y);
-        }
-        else if (collision.gameObject.tag == "BottomWall")
-        {
-            //Debug.Log("bottom wall");
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 14);
-        }
-        else if (collision.gameObject.tag == "TopWall")
-        {
-            //Debug.Log("top wall");
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 14);
+            if (collision.gameObject.tag == "LeftWall")
+            {
+                //Debug.Log("left wall");
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x + 14, gameObject.transform.position.y);
+            }
+            else if (collision.gameObject.tag == "RightWall")
+            {
+                //Debug.Log("right wall");
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x - 14, gameObject.transform.position.y);
+            }
+            else if (collision.gameObject.tag == "BottomWall")
+            {
+                //Debug.Log("bottom wall");
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 14);
+            }
+            else if (collision.gameObject.tag == "TopWall")
+            {
+                //Debug.Log("top wall");
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 14);
+            }
         }
     }
 
 
     //follow the player within a certain radius
-    private void Chase() { }
+    private void Chase(bool attract)
+    {
+        if (attract)
+            Debug.Log("true");
+        //else
+
+
+    }
 
     //catch the player if it touches the player
-    private void Catch() { }
+    private void Catch()
+    {
+
+    }
 
     //disappear when player interacts
     private void Disappear() { }
@@ -172,6 +215,6 @@ public class MonsterIndividualController : MonoBehaviour
         signalDisplay.GetComponent<TwitchNameController>().Display(text);
         signalDisplay.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
         signalDisplay.SetActive(true);
-        Debug.Log("final vote: " + text);
+        //Debug.Log("final vote: " + text);
     }
 }

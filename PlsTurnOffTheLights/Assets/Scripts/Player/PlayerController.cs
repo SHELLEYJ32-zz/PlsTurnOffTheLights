@@ -5,22 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float playerSpeed = 2.0f;
-    public int playHP = 3;
+    public float playerSpeed;
+    public int playerHP;
     public float monsterCaughtTime;
-    public float interactTimer = 0.3f;
-    //temp var
-    public Material normalMat;
-    public Material interactMat;
+    public float interactTimer;
+    public BoxCollider2D wallCollider;
+    public BoxCollider2D monsterCollider;
+    public CircleCollider2D interactCollider;
+    //public CircleCollider2D attractiveCollider;
+    //public BoxCollider2D interactCollider;
 
     private Rigidbody2D playerRB;
-    private float localTimer;
+    private float interactLocalTimer;
+    private float monsterLocalTimer;
+    private bool caught;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
         GetComponent<CircleCollider2D>().enabled = false;
+        caught = false;
+        Debug.Log("player HP left: " + playerHP);
     }
 
     // Update is called once per frame
@@ -28,19 +34,27 @@ public class PlayerController : MonoBehaviour
     {
         Move();
 
-        //count down interact time if effective
-        if (localTimer > 0)
-            localTimer -= Time.deltaTime;
+        //if caught, count down caught time
+        if (caught)
+        {
+            if (monsterLocalTimer < 0)
+                LoseLife();
+            else
+                monsterLocalTimer -= Time.deltaTime;
+        }
+
+        //if interact, count down interact time 
+        if (interactLocalTimer > 0)
+            interactLocalTimer -= Time.deltaTime;
         else
         {
             GetComponent<CircleCollider2D>().enabled = false;
-            GetComponent<MeshRenderer>().material = normalMat;
         }
 
         if (Input.GetKeyDown("space"))
         {
             //reset timer
-            localTimer = interactTimer;
+            interactLocalTimer = interactTimer;
             //Debug.Log("triggered");
             Interact();
         }
@@ -63,13 +77,46 @@ public class PlayerController : MonoBehaviour
     void Interact()
     {
         GetComponent<CircleCollider2D>().enabled = true;
-        GetComponent<MeshRenderer>().material = interactMat;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Monster")
+        {
+            if (monsterCollider.IsTouching(collision.gameObject.GetComponent<CircleCollider2D>()))
+            {
+
+                if (!caught)
+                {
+                    caught = true;
+                    monsterLocalTimer = monsterCaughtTime;
+                }
+                else
+                {
+                    //if caught by multiple monsters, player dies immediately
+                    Die();
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Monster" && caught)
+        {
+            caught = false;
+        }
     }
 
     //lose one life
     void LoseLife()
     {
+        playerHP--;
+        monsterLocalTimer = monsterCaughtTime;
+        Debug.Log("player HP left: " + playerHP);
 
+        if (playerHP == 0)
+            Die();
     }
 
     //trigger death
