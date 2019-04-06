@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
     public BoxCollider2D wallCollider;
     public BoxCollider2D monsterCollider;
     public CircleCollider2D interactCollider;
-    //public CircleCollider2D attractiveCollider;
-    //public BoxCollider2D interactCollider;
 
     private Rigidbody2D playerRB;
     private float interactLocalTimer;
@@ -83,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Monster")
         {
-            if (monsterCollider.IsTouching(collision.gameObject.GetComponent<CircleCollider2D>()))
+            if (monsterCollider.IsTouching(collision.gameObject.GetComponent<MonsterIndividualController>().bodyCollider))
             {
 
                 if (!caught)
@@ -102,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Monster" && caught)
+        if (caught && monsterCollider.IsTouching(collision.gameObject.GetComponent<MonsterIndividualController>().bodyCollider))
         {
             caught = false;
         }

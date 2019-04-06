@@ -9,8 +9,9 @@ public class MonsterIndividualController : MonoBehaviour
     public float twitchEffectiveTime;
     public float maxLightIntensity;
     public float tempDisappearTime;
+    public float attractiveRadius;
     public CircleCollider2D bodyCollider;
-    public CircleCollider2D attractiveCollider;
+    //public CircleCollider2D attractiveCollider;
 
     private Rigidbody2D monsterRB;
     private float driftChangeTimer = 3.0f;
@@ -19,25 +20,29 @@ public class MonsterIndividualController : MonoBehaviour
     private float twicthLocalTimer;
     private GameObject signalPrefab;
     private GameObject signalDisplay;
+    private bool chaseFlag;
+    private GameObject player;
 
     void Start()
     {
         monsterRB = GetComponent<Rigidbody2D>();
         driftLocalTimer = driftChangeTimer;
         twitchFlag = false;
+        chaseFlag = false;
         signalPrefab = Resources.Load("Signal") as GameObject;
         signalDisplay = Instantiate(signalPrefab);
         signalDisplay.SetActive(false);
+        player = GameObject.FindGameObjectWithTag("player");
     }
 
     void FixedUpdate()
     {
 
-        if (!twitchFlag)
+        if (!twitchFlag && !chaseFlag)
         {
             Drift();
         }
-        else
+        else if (twitchFlag)
         {
             if (twicthLocalTimer > 0)
             {
@@ -52,8 +57,17 @@ public class MonsterIndividualController : MonoBehaviour
                 driftLocalTimer = driftChangeTimer;
                 monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
             }
-
         }
+
+        if (Vector2.Distance(transform.position, player.transform.position) < attractiveRadius)
+        {
+            Chase(true);
+        }
+        else
+        {
+            Chase(false);
+        }
+
 
     }
 
@@ -97,58 +111,57 @@ public class MonsterIndividualController : MonoBehaviour
         {
             if (bodyCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
                 Catch();
-            else if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
-                Chase(true);
+            //else if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+            //Chase(true, collision);
         }
-        else
+        else if (bodyCollider.IsTouching(collision))
             Teleport(collision);
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "player")
-        {
-            if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
-                Chase(true);
-        }
-    }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "player")
+    //    {
+    //        if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+    //            Chase(true, collision);
+    //    }
+    //}
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "player")
-        {
-            if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
-                Chase(false);
-        }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "player")
+    //    {
+    //        if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
+    //            Chase(false, collision);
+    //    }
 
-    }
+    //}
 
     private void Teleport(Collider2D collision)
     {
-        if (bodyCollider.IsTouching(collision))
+
+        if (collision.gameObject.tag == "LeftWall")
         {
-            if (collision.gameObject.tag == "LeftWall")
-            {
-                //Debug.Log("left wall");
-                gameObject.transform.position = new Vector2(gameObject.transform.position.x + 14, gameObject.transform.position.y);
-            }
-            else if (collision.gameObject.tag == "RightWall")
-            {
-                //Debug.Log("right wall");
-                gameObject.transform.position = new Vector2(gameObject.transform.position.x - 14, gameObject.transform.position.y);
-            }
-            else if (collision.gameObject.tag == "BottomWall")
-            {
-                //Debug.Log("bottom wall");
-                gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 14);
-            }
-            else if (collision.gameObject.tag == "TopWall")
-            {
-                //Debug.Log("top wall");
-                gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 14);
-            }
+            //Debug.Log("left wall");
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x + 14, gameObject.transform.position.y);
         }
+        else if (collision.gameObject.tag == "RightWall")
+        {
+            //Debug.Log("right wall");
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x - 14, gameObject.transform.position.y);
+        }
+        else if (collision.gameObject.tag == "BottomWall")
+        {
+            //Debug.Log("bottom wall");
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 14);
+        }
+        else if (collision.gameObject.tag == "TopWall")
+        {
+            //Debug.Log("top wall");
+            gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 14);
+        }
+
     }
 
 
@@ -156,8 +169,17 @@ public class MonsterIndividualController : MonoBehaviour
     private void Chase(bool attract)
     {
         if (attract)
-            Debug.Log("true");
-        //else
+        {
+            chaseFlag = true;
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, originalMonsterSpeed * Time.deltaTime);
+            //Debug.Log("monster: " + transform.position);
+            //Debug.Log("player: " + collision.gameObject.transform.position);
+        }
+
+        else
+        {
+            chaseFlag = false;
+        }
 
 
     }
@@ -165,7 +187,7 @@ public class MonsterIndividualController : MonoBehaviour
     //catch the player if it touches the player
     private void Catch()
     {
-
+        //play animation
     }
 
     //disappear when player interacts
