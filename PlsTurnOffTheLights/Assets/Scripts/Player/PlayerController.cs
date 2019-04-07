@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private float monsterLocalTimer;
     private bool caught;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -100,20 +99,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (caught && monsterCollider.IsTouching(collision.gameObject.GetComponent<MonsterIndividualController>().bodyCollider))
+        //Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Monster")
         {
-            caught = false;
+            if (caught && monsterCollider.IsTouching(collision.gameObject.GetComponent<MonsterIndividualController>().bodyCollider))
+            {
+                caught = false;
+            }
         }
     }
 
     //lose one life
     void LoseLife()
     {
-        playerHP--;
-        monsterLocalTimer = monsterCaughtTime;
-        Debug.Log("player HP left: " + playerHP);
+        if (playerHP - 1 >= 0)
+        {
+            playerHP--;
+            monsterLocalTimer = monsterCaughtTime;
+            //Debug.Log("player HP left: " + playerHP);
 
-        if (playerHP == 0)
+        }
+        else
             Die();
     }
 

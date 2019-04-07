@@ -11,7 +11,6 @@ public class MonsterIndividualController : MonoBehaviour
     public float tempDisappearTime;
     public float attractiveRadius;
     public CircleCollider2D bodyCollider;
-    //public CircleCollider2D attractiveCollider;
 
     private Rigidbody2D monsterRB;
     private float driftChangeTimer = 3.0f;
@@ -111,54 +110,29 @@ public class MonsterIndividualController : MonoBehaviour
         {
             if (bodyCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
                 Catch();
-            //else if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
-            //Chase(true, collision);
         }
         else if (bodyCollider.IsTouching(collision))
             Teleport(collision);
 
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "player")
-    //    {
-    //        if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
-    //            Chase(true, collision);
-    //    }
-    //}
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "player")
-    //    {
-    //        if (attractiveCollider.IsTouching(collision.gameObject.GetComponent<PlayerController>().monsterCollider))
-    //            Chase(false, collision);
-    //    }
-
-    //}
-
     private void Teleport(Collider2D collision)
     {
 
         if (collision.gameObject.tag == "LeftWall")
         {
-            //Debug.Log("left wall");
             gameObject.transform.position = new Vector2(gameObject.transform.position.x + 14, gameObject.transform.position.y);
         }
         else if (collision.gameObject.tag == "RightWall")
         {
-            //Debug.Log("right wall");
             gameObject.transform.position = new Vector2(gameObject.transform.position.x - 14, gameObject.transform.position.y);
         }
         else if (collision.gameObject.tag == "BottomWall")
         {
-            //Debug.Log("bottom wall");
             gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 14);
         }
         else if (collision.gameObject.tag == "TopWall")
         {
-            //Debug.Log("top wall");
             gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 14);
         }
 
@@ -172,8 +146,6 @@ public class MonsterIndividualController : MonoBehaviour
         {
             chaseFlag = true;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, originalMonsterSpeed * Time.deltaTime);
-            //Debug.Log("monster: " + transform.position);
-            //Debug.Log("player: " + collision.gameObject.transform.position);
         }
 
         else
@@ -181,7 +153,7 @@ public class MonsterIndividualController : MonoBehaviour
             chaseFlag = false;
         }
 
-
+        //Debug.Log(chaseFlag);
     }
 
     //catch the player if it touches the player
