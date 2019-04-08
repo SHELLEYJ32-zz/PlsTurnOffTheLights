@@ -21,7 +21,7 @@ public class MonsterTwitchListener : MonoBehaviour
     {
         if (localTimer <= 0)
         {
-            SelectRandomMonster(finalVote);
+            //SelectRandomMonster(finalVote);
             ClearVotes();
             localTimer = voteCountdown;
         }

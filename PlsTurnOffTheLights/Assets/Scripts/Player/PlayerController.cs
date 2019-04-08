@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         GetComponent<CircleCollider2D>().enabled = false;
         caught = false;
-        Debug.Log("player HP left: " + playerHP);
     }
 
     // Update is called once per frame
