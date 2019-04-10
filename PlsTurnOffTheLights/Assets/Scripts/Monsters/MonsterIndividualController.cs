@@ -71,13 +71,16 @@ public class MonsterIndividualController : MonoBehaviour
             }
         }
 
+        //Debug.Log(chaseFlag);
         if (!twitchFlag && Vector2.Distance(transform.position, player.transform.position) <= attractiveRadius)
         {
             Chase(true);
+            //Debug.Log("chase");
         }
         else
         {
             Chase(false);
+            //Debug.Log("abort");
         }
 
 
@@ -99,10 +102,6 @@ public class MonsterIndividualController : MonoBehaviour
                 moveChanceX = Random.Range(-1, 2);
                 moveChanceY = Random.Range(-1, 2);
             }
-
-            //Debug.Log("x: " + moveChanceX + " y: " + moveChanceY);
-            //CheckOneDirection(moveChanceX + 1, moveChanceY + 1);
-            //Debug.Log(lightCamera.GetComponent<LightCheckController>().lightLevel);
 
             monsterRB.velocity = new Vector2(moveChanceX * originalMonsterSpeed, moveChanceY * originalMonsterSpeed);
             monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
@@ -161,7 +160,12 @@ public class MonsterIndividualController : MonoBehaviour
         if (attract)
         {
             chaseFlag = true;
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, originalMonsterSpeed * Time.deltaTime);
+            monsterRB.velocity = new Vector2(0, 0);
+            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, player.transform.position, originalMonsterSpeed * Time.deltaTime);
+
+            //Debug.Log("velocity: " + monsterRB.velocity);
+            //Debug.Log("monster: " + transform.position);
+            //Debug.Log("player: " + player.transform.position);
         }
 
         else

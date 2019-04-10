@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour
         {
             //reset timer
             interactLocalTimer = interactTimer;
-            //Debug.Log("triggered");
             Interact();
         }
 
@@ -98,10 +97,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Monster")
         {
-            if (caught && monsterCollider.IsTouching(collision.gameObject.GetComponent<MonsterIndividualController>().bodyCollider))
+            if (caught)
             {
                 caught = false;
             }
@@ -115,8 +113,6 @@ public class PlayerController : MonoBehaviour
         {
             playerHP--;
             monsterLocalTimer = monsterCaughtTime;
-            //Debug.Log("player HP left: " + playerHP);
-
         }
         else
             Die();
