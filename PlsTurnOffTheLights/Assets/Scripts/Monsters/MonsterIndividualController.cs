@@ -22,7 +22,6 @@ public class MonsterIndividualController : MonoBehaviour
     private GameObject player;
     private int moveChanceX;
     private int moveChanceY;
-    private GameObject lightCamera;
     private Vector2 birthPlace;
     private bool disappearFlag;
     private float disappearLocalTimer;
@@ -31,12 +30,11 @@ public class MonsterIndividualController : MonoBehaviour
     {
         birthPlace = transform.position;
         monsterRB = GetComponent<Rigidbody2D>();
-        driftLocalTimer = driftChangeTimer;
+        driftLocalTimer = 0;
         signalPrefab = Resources.Load("Signal") as GameObject;
         signalDisplay = Instantiate(signalPrefab);
         signalDisplay.SetActive(false);
         player = GameObject.FindGameObjectWithTag("player");
-        lightCamera = null;
     }
 
     void FixedUpdate()
@@ -73,7 +71,7 @@ public class MonsterIndividualController : MonoBehaviour
             }
         }
 
-        if (!twitchFlag && Vector2.Distance(transform.position, player.transform.position) < attractiveRadius)
+        if (!twitchFlag && Vector2.Distance(transform.position, player.transform.position) <= attractiveRadius)
         {
             Chase(true);
         }
@@ -83,49 +81,6 @@ public class MonsterIndividualController : MonoBehaviour
         }
 
 
-    }
-
-    //check light intensity in one direction
-    private bool CheckOneDirection(int x, int y)
-    {
-        if (x == 0 && y == 0)
-            lightCamera = transform.GetChild(0).gameObject;
-        else if (x == 0 && y == 1)
-            lightCamera = transform.GetChild(1).gameObject;
-        else if (x == 0 && y == 2)
-            lightCamera = transform.GetChild(2).gameObject;
-        else if (x == 1 && y == 0)
-            lightCamera = transform.GetChild(3).gameObject;
-        else if (x == 1 && y == 1)
-            lightCamera = transform.GetChild(4).gameObject;
-        else if (x == 1 && y == 2)
-            lightCamera = transform.GetChild(5).gameObject;
-        else if (x == 2 && y == 0)
-            lightCamera = transform.GetChild(6).gameObject;
-        else if (x == 2 && y == 1)
-            lightCamera = transform.GetChild(7).gameObject;
-        else if (x == 2 && y == 2)
-            lightCamera = transform.GetChild(8).gameObject;
-
-        //Debug.Log(lightCamera.GetComponent<LightCheckController>().lightLevel);
-        return lightCamera.GetComponent<LightCheckController>().CheckLightIntensity();
-    }
-
-
-    private bool CheckAllDirection()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                //if one direction is available
-                if (CheckOneDirection(i, j))
-                    return true;
-            }
-
-        }
-        //if all directions are invalid
-        return false;
     }
 
     //drift randomly within dark space
@@ -138,39 +93,27 @@ public class MonsterIndividualController : MonoBehaviour
             moveChanceX = Random.Range(-1, 2);
             moveChanceY = Random.Range(-1, 2);
 
-            if (CheckAllDirection())
+            //avoid it from not moving
+            while (moveChanceX == 0 && moveChanceY == 0)
             {
-                while (moveChanceX == 0 && moveChanceY == 0 || !CheckOneDirection(moveChanceX + 1, moveChanceY + 1))
-                {
-                    moveChanceX = Random.Range(-1, 2);
-                    moveChanceY = Random.Range(-1, 2);
-                }
-
-                //Debug.Log("x: " + moveChanceX + " y: " + moveChanceY);
-                //CheckOneDirection(moveChanceX + 1, moveChanceY + 1);
-                //Debug.Log(lightCamera.GetComponent<LightCheckController>().lightLevel);
-
-                monsterRB.velocity = new Vector2(moveChanceX * originalMonsterSpeed, moveChanceY * originalMonsterSpeed);
-                monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
+                moveChanceX = Random.Range(-1, 2);
+                moveChanceY = Random.Range(-1, 2);
             }
-            else
-            {
-                Regenerate();
-                driftLocalTimer = 0;
-            }
+
+            //Debug.Log("x: " + moveChanceX + " y: " + moveChanceY);
+            //CheckOneDirection(moveChanceX + 1, moveChanceY + 1);
+            //Debug.Log(lightCamera.GetComponent<LightCheckController>().lightLevel);
+
+            monsterRB.velocity = new Vector2(moveChanceX * originalMonsterSpeed, moveChanceY * originalMonsterSpeed);
+            monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
         }
         else
         {
             driftLocalTimer -= Time.deltaTime;
-            if (!CheckOneDirection(moveChanceX + 1, moveChanceY + 1))
-            {
-                //Debug.Log("false");
-                driftLocalTimer = 0;
-            }
         }
-
     }
 
+    //with player and wall
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "player")
@@ -179,32 +122,38 @@ public class MonsterIndividualController : MonoBehaviour
                 Catch();
         }
         else if (bodyCollider.IsTouching(collision))
-            Teleport(collision);
+            TurnBack(collision);
 
     }
 
-    private void Teleport(Collider2D collision)
+    //with wall and light
+    private void TurnBack(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "LeftWall")
+        if (collision.gameObject.tag == "LeftWall" || collision.gameObject.tag == "RightWall")
         {
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x + 14, gameObject.transform.position.y);
+            monsterRB.velocity = new Vector2(-monsterRB.velocity.x, monsterRB.velocity.y);
         }
-        else if (collision.gameObject.tag == "RightWall")
+        else if (collision.gameObject.tag == "TopWall" || collision.gameObject.tag == "BottomWall")
         {
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x - 14, gameObject.transform.position.y);
+            monsterRB.velocity = new Vector2(monsterRB.velocity.x, -monsterRB.velocity.y);
         }
-        else if (collision.gameObject.tag == "BottomWall")
+        else if (collision.gameObject.tag == "Light")
         {
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 14);
-        }
-        else if (collision.gameObject.tag == "TopWall")
-        {
-            gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 14);
+            monsterRB.velocity = new Vector2(-monsterRB.velocity.x, -monsterRB.velocity.y);
         }
 
+        monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
     }
 
+    //if lights are turned back on when monster is in
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Light")
+        {
+            Regenerate();
+        }
+    }
 
     //follow the player within a certain radius
     private void Chase(bool attract)
@@ -232,21 +181,9 @@ public class MonsterIndividualController : MonoBehaviour
     //disappear when surrounded by light
     private void Regenerate()
     {
-        //if (!disappearFlag)
-        //{
-        //    //play disappear animation
-        //    gameObject.SetActive(false);
-        //    disappearFlag = true;
-        //    disappearLocalTimer = tempDisappearTime;
-        //}
-        //else
-        //{
 
-        //regenerate
         transform.position = birthPlace;
-        //disappearFlag = false;
-        //gameObject.SetActive(true);
-        //}
+
     }
 
     //move based on twitch command

@@ -12,6 +12,7 @@ TagManager:
   - LeftWall
   - RightWall
   - player
+  - Light
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Monster
   - MidWall
   - Floor
-  - 
-  - 
+  - Light
+  - Player
   - 
   - 
   - 

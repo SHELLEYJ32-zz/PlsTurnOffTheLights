@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     public int playerHP;
     public float monsterCaughtTime;
     public float interactTimer;
-    public BoxCollider2D wallCollider;
-    public BoxCollider2D monsterCollider;
+    public PolygonCollider2D wallCollider;
+    public PolygonCollider2D monsterCollider;
     public CircleCollider2D interactCollider;
 
     private Rigidbody2D playerRB;

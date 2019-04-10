@@ -9,9 +9,18 @@ public class LightController : MonoBehaviour
     private void FixedUpdate()
     {
         if (pairedSwitch.IsSwitchOn())
+        {
             GetComponent<Light>().enabled = true;
+            GetComponent<CircleCollider2D>().enabled = true;
+        }
+
         else
+        {
             GetComponent<Light>().enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
+        }
+
+
     }
 
 }
