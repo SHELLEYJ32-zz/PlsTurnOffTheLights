@@ -60,10 +60,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\General\ButtonController.cs" />
+    <Compile Include="Assets\Scripts\General\GameplayController.cs" />
+    <Compile Include="Assets\Scripts\General\VolumeController.cs" />
     <Compile Include="Assets\Scripts\Lights\LightController.cs" />
     <Compile Include="Assets\Scripts\Lights\SwitchController.cs" />
     <Compile Include="Assets\Scripts\Monsters\LightCheckController.cs" />
     <Compile Include="Assets\Scripts\Monsters\MonsterIndividualController.cs" />
+    <Compile Include="Assets\Scripts\Monsters\MonsterSpawnController.cs" />
     <Compile Include="Assets\Scripts\Monsters\MonsterTwitchListener.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHPDisplayController.cs" />
