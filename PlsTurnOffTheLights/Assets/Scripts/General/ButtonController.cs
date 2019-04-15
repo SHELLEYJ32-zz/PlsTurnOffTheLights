@@ -17,9 +17,10 @@ public class ButtonController : MonoBehaviour
         SceneManager.LoadScene("TwitchInputScene");
     }
 
-    public void Submit()
+    public void Submit(string text)
     {
-
+        GameplayController.instance.twitchName = text;
+        Debug.Log(GameplayController.instance.twitchName);
     }
 
     public void LoadOption()
@@ -42,7 +43,10 @@ public class ButtonController : MonoBehaviour
 
     }
 
-    public void Resume() { }
+    public void Resume()
+    {
+
+    }
 
     public void Exit()
     {

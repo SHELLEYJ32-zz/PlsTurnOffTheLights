@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -80,16 +81,10 @@ public class PlayerController : MonoBehaviour
         {
             if (monsterCollider.IsTouching(collision.gameObject.GetComponent<MonsterIndividualController>().bodyCollider))
             {
-
                 if (!caught)
                 {
                     caught = true;
                     monsterLocalTimer = monsterCaughtTime;
-                }
-                else
-                {
-                    //if caught by multiple monsters, player dies immediately
-                    Die();
                 }
             }
         }
@@ -121,7 +116,7 @@ public class PlayerController : MonoBehaviour
     //trigger death
     void Die()
     {
-
+        SceneManager.LoadScene("GameOverScene");
     }
 
 }

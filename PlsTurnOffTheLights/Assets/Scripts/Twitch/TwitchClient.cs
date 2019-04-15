@@ -7,7 +7,7 @@ public class TwitchClient : MonoBehaviour
 {
 
     public Client client;
-    public string channelName = "shelleyj16";
+    public string channelName;
     private float helpTimer;
     private bool helpFlag;
     private MonsterTwitchListener twitchListener;
@@ -17,7 +17,7 @@ public class TwitchClient : MonoBehaviour
         Application.runInBackground = true;
 
         //change
-        //channelName = Global.Instance.twitchName; //get the name of the twitch channel as set in the options menu
+        channelName = GameplayController.instance.twitchName; //get the name of the twitch channel as set in the options menu
 
         ConnectionCredentials credentials = new ConnectionCredentials("gatekeeperlightsbot", Secrets.accessToken); //set up the twitch bots credentials
         client = new Client();
