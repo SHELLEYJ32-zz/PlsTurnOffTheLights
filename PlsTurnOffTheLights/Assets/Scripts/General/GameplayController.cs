@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class GameplayController : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public static GameplayController instance;              //Static instance of GameManager which allows it to be accessed by any other script.
     public string twitchName;
+    public bool paused;
     //private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
     // private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 
@@ -33,7 +35,31 @@ public class GameplayController : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        if (Input.GetKeyDown("escape") && !paused)
+        {
+            Pause();
+        }
 
+    }
+
+    public void Pause()
+    {
+        if (SceneManager.GetActiveScene().name == "FirstLvScene")
+        {
+            Time.timeScale = 0f;
+            SceneManager.LoadScene("PauseScene", LoadSceneMode.Additive);
+            paused = true;
+        }
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        SceneManager.UnloadScene("PauseScene");
+        paused = false;
+    }
 
 
 }

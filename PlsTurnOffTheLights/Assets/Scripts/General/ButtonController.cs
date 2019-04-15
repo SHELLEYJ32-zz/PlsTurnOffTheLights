@@ -7,13 +7,11 @@ public class ButtonController : MonoBehaviour
 {
     public void LoadInstruction()
     {
-        Debug.Log("clicked I");
         SceneManager.LoadScene("InstructionScene");
     }
 
     public void LoadTwitchSetting()
     {
-        Debug.Log("clicked T");
         SceneManager.LoadScene("TwitchInputScene");
     }
 
@@ -30,6 +28,8 @@ public class ButtonController : MonoBehaviour
 
     public void LoadMenu()
     {
+        Time.timeScale = 1f;
+        GameplayController.instance.paused = false;
         SceneManager.LoadScene("MenuScene");
     }
 
@@ -38,14 +38,9 @@ public class ButtonController : MonoBehaviour
         SceneManager.LoadScene("FirstLvScene");
     }
 
-    public void Pause()
-    {
-
-    }
-
     public void Resume()
     {
-
+        GameplayController.instance.Resume();
     }
 
     public void Exit()
