@@ -104,13 +104,17 @@ public class PlayerController : MonoBehaviour
     //lose one life
     void LoseLife()
     {
-        if (playerHP - 1 >= 0)
+        if (playerHP - 1 > 0)
         {
             playerHP--;
             monsterLocalTimer = monsterCaughtTime;
         }
         else
+        {
+            playerHP--;
             Die();
+        }
+
     }
 
     //trigger death

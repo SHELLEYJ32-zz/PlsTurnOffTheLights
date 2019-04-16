@@ -10,6 +10,7 @@ public class GameplayController : MonoBehaviour
     public static GameplayController instance;              //Static instance of GameManager which allows it to be accessed by any other script.
     public string twitchName;
     public bool paused;
+    private float transitTime = 2.0f;
     //private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
     // private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 
@@ -40,6 +41,15 @@ public class GameplayController : MonoBehaviour
         if (Input.GetKeyDown("escape") && !paused)
         {
             Pause();
+        }
+        if (SceneManager.GetActiveScene().name == "LvCompleteScene")
+        {
+            transitTime -= Time.deltaTime;
+        }
+        if (transitTime <= 0)
+        {
+            SceneManager.LoadScene("MenuScene");
+            transitTime = 2.0f;
         }
 
     }

@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\General\ButtonController.cs" />
     <Compile Include="Assets\Scripts\General\GameplayController.cs" />
+    <Compile Include="Assets\Scripts\General\LevelController.cs" />
     <Compile Include="Assets\Scripts\Lights\LightController.cs" />
     <Compile Include="Assets\Scripts\Lights\SwitchController.cs" />
     <Compile Include="Assets\Scripts\Monsters\LightCheckController.cs" />

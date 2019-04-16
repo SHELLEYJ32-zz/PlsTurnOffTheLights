@@ -13,6 +13,7 @@ TagManager:
   - RightWall
   - player
   - Light
+  - Switch
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Floor
   - Light
   - Player
-  - 
+  - OutWall
   - 
   - 
   - 
