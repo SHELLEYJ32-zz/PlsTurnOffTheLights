@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private float interactLocalTimer;
     private float monsterLocalTimer;
     private bool caught;
+    private bool inLight;
 
     void Start()
     {
@@ -88,17 +89,35 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        if (collision.gameObject.tag == "Light")
+        {
+            inLight = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Light")
+        {
+            inLight = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Monster")
+        if (collision.gameObject.tag == "Monster" && caught)
         {
-            if (caught)
-            {
-                caught = false;
-            }
+            caught = false;
         }
+        if (collision.gameObject.tag == "Light")
+        {
+            inLight = false;
+        }
+    }
+
+    public bool InLight()
+    {
+        return inLight;
     }
 
     //lose one life

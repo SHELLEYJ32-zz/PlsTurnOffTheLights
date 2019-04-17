@@ -43,17 +43,6 @@ public class MonsterIndividualController : MonoBehaviour
         {
             Drift();
         }
-        else if (disappearFlag)
-        {
-            if (disappearLocalTimer > 0)
-                disappearLocalTimer -= Time.deltaTime;
-            else
-            {
-                Regenerate();
-
-            }
-
-        }
         else if (twitchFlag)
         {
             if (twicthLocalTimer > 0)
@@ -70,9 +59,10 @@ public class MonsterIndividualController : MonoBehaviour
                 monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
             }
         }
+        bool closeEnough = Vector2.Distance(transform.position, player.transform.position) <= attractiveRadius;
+        bool playerInLight = player.GetComponent<PlayerController>().InLight();
 
-        //Debug.Log(chaseFlag);
-        if (!twitchFlag && Vector2.Distance(transform.position, player.transform.position) <= attractiveRadius)
+        if (!twitchFlag && !playerInLight && closeEnough)
         {
             Chase(true);
             //Debug.Log("chase");
@@ -137,7 +127,7 @@ public class MonsterIndividualController : MonoBehaviour
         {
             monsterRB.velocity = new Vector2(monsterRB.velocity.x, -monsterRB.velocity.y);
         }
-        else if (collision.gameObject.tag == "Light")
+        else
         {
             monsterRB.velocity = new Vector2(-monsterRB.velocity.x, -monsterRB.velocity.y);
         }
@@ -150,6 +140,7 @@ public class MonsterIndividualController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Light")
         {
+            driftLocalTimer = 0;
             Regenerate();
         }
     }
