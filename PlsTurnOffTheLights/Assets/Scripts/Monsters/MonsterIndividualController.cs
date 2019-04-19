@@ -23,8 +23,7 @@ public class MonsterIndividualController : MonoBehaviour
     private int moveChanceX;
     private int moveChanceY;
     private Vector2 birthPlace;
-    private bool disappearFlag;
-    private float disappearLocalTimer;
+    private Vector2 originalVelocity;
 
     void Start()
     {
@@ -39,7 +38,7 @@ public class MonsterIndividualController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!twitchFlag && !chaseFlag && !disappearFlag)
+        if (!twitchFlag && !chaseFlag)
         {
             Drift();
         }
@@ -122,7 +121,7 @@ public class MonsterIndividualController : MonoBehaviour
         if (collision.gameObject.tag == "Light")
         {
             driftLocalTimer = 0;
-            Regenerate();
+            Disappear();
         }
     }
 
@@ -153,10 +152,7 @@ public class MonsterIndividualController : MonoBehaviour
             chaseFlag = true;
             monsterRB.velocity = new Vector2(0, 0);
             gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, player.transform.position, originalMonsterSpeed * Time.deltaTime);
-
-            //Debug.Log("velocity: " + monsterRB.velocity);
-            //Debug.Log("monster: " + transform.position);
-            //Debug.Log("player: " + player.transform.position);
+            driftLocalTimer = 0;
         }
 
         else
@@ -174,11 +170,10 @@ public class MonsterIndividualController : MonoBehaviour
     }
 
     //disappear when surrounded by light
-    private void Regenerate()
+    public void Disappear()
     {
-
         transform.position = birthPlace;
-
+        gameObject.SetActive(false);
     }
 
     //move based on twitch command

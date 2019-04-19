@@ -7,10 +7,10 @@ public class TwitchNameController : MonoBehaviour
 {
     public Text userNameDisplay;
 
-    public void Display(string userName)
+    public void Display(string direction)
     {
         //Debug.Log(userName);
-        userNameDisplay.text = userName;
+        userNameDisplay.text = direction;
     }
 
 }

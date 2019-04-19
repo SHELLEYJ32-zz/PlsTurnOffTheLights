@@ -61,7 +61,6 @@ public class GameplayController : MonoBehaviour
             }
             transitTime = 2.0f;
         }
-
     }
 
     public void Pause()
