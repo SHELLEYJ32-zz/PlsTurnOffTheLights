@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 79abe68730c904cdb9ed252ab45fa2ff, type: 2}
   twitchName: 
+  paused: 0
 --- !u!4 &3111552
 Transform:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

@@ -12,7 +12,8 @@ public class GameplayController : MonoBehaviour
     public bool paused;
     private float transitTime = 2.0f;
     //private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-    // private int level = 3;                                  //Current level number, expressed in game as "Day 1".
+    private int levelIndex;
+    private int maxIndex = 8;                                 //Current level build index
 
     void Awake()
     {
@@ -42,13 +43,22 @@ public class GameplayController : MonoBehaviour
         {
             Pause();
         }
+        if (SceneManager.GetActiveScene().buildIndex > 6)
+        {
+            levelIndex = SceneManager.GetActiveScene().buildIndex;
+        }
         if (SceneManager.GetActiveScene().name == "LvCompleteScene")
         {
             transitTime -= Time.deltaTime;
         }
         if (transitTime <= 0)
         {
-            SceneManager.LoadScene("MenuScene");
+            if (levelIndex < maxIndex)
+                SceneManager.LoadScene(levelIndex + 1);
+            else
+            {
+                SceneManager.LoadScene("MenuScene");
+            }
             transitTime = 2.0f;
         }
 
@@ -56,7 +66,7 @@ public class GameplayController : MonoBehaviour
 
     public void Pause()
     {
-        if (SceneManager.GetActiveScene().name == "FirstLvScene")
+        if (SceneManager.GetActiveScene().buildIndex > 6)
         {
             Time.timeScale = 0f;
             SceneManager.LoadScene("PauseScene", LoadSceneMode.Additive);

@@ -73,7 +73,6 @@ public class MonsterIndividualController : MonoBehaviour
             //Debug.Log("abort");
         }
 
-
     }
 
     //drift randomly within dark space
@@ -102,7 +101,7 @@ public class MonsterIndividualController : MonoBehaviour
         }
     }
 
-    //with player and wall
+    //with player, lights
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "player")
@@ -111,14 +110,26 @@ public class MonsterIndividualController : MonoBehaviour
                 Catch();
         }
         else if (bodyCollider.IsTouching(collision))
+        {
             TurnBack(collision);
+        }
 
     }
 
-    //with wall and light
+    //if lights are turned back on when monster is in, monsters regenerate
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Light")
+        {
+            driftLocalTimer = 0;
+            Regenerate();
+        }
+    }
+
+    //with other monsters, wall, switches, lightbulbs
     private void TurnBack(Collider2D collision)
     {
-
+        //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "LeftWall" || collision.gameObject.tag == "RightWall")
         {
             monsterRB.velocity = new Vector2(-monsterRB.velocity.x, monsterRB.velocity.y);
@@ -131,18 +142,7 @@ public class MonsterIndividualController : MonoBehaviour
         {
             monsterRB.velocity = new Vector2(-monsterRB.velocity.x, -monsterRB.velocity.y);
         }
-
         monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
-    }
-
-    //if lights are turned back on when monster is in
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Light")
-        {
-            driftLocalTimer = 0;
-            Regenerate();
-        }
     }
 
     //follow the player within a certain radius
