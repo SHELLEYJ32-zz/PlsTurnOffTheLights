@@ -57,7 +57,7 @@ public class TwitchClient : MonoBehaviour
         }
         else if (e.Command.CommandText == "u" || e.Command.CommandText == "d" || e.Command.CommandText == "l" || e.Command.CommandText == "r")
         {
-            //Debug.Log("twitch message: " + e.Command.CommandText);
+            Debug.Log("twitch message: " + e.Command.CommandText);
             twitchListener.CollectVotes(e.Command.CommandText);
         }
     }

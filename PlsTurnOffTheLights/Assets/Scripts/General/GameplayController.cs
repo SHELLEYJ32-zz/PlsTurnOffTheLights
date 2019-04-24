@@ -13,7 +13,7 @@ public class GameplayController : MonoBehaviour
     private float transitTime = 2.0f;
     //private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
     private int levelIndex;
-    private int maxIndex = 8;                                 //Current level build index
+    private int maxIndex = 12;                                 //Current level build index
 
     void Awake()
     {
