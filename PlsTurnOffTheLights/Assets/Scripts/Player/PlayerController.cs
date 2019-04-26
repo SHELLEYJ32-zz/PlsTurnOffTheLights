@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public PolygonCollider2D wallCollider;
     public PolygonCollider2D monsterCollider;
     public CircleCollider2D interactCollider;
+    public Animator animator;
 
     private Rigidbody2D playerRB;
     private float interactLocalTimer;
@@ -55,6 +57,44 @@ public class PlayerController : MonoBehaviour
             interactLocalTimer = interactTimer;
             Interact();
         }
+
+        //flip
+        if (playerRB.velocity.x > 0)
+            GetComponent<SpriteRenderer>().flipX = true;
+        else
+            GetComponent<SpriteRenderer>().flipX = false;
+
+        //set animator
+        animator.SetFloat("speedX", Mathf.Abs(playerRB.velocity.x));
+
+        if (Mathf.Abs(playerRB.velocity.x) <= 0)
+        {
+            if (playerRB.velocity.y < 0)
+            {
+                animator.SetBool("static", false);
+                animator.SetBool("verticalDown", true);
+                animator.SetBool("verticalUp", false);
+            }
+            else if (playerRB.velocity.y > 0)
+            {
+                animator.SetBool("static", false);
+                animator.SetBool("verticalDown", false);
+                animator.SetBool("verticalUp", true);
+            }
+            else
+            {
+                animator.SetBool("static", true);
+                animator.SetBool("verticalDown", false);
+                animator.SetBool("verticalUp", false);
+            }
+        }
+        else
+        {
+            animator.SetBool("static", false);
+            animator.SetBool("verticalDown", false);
+            animator.SetBool("verticalUp", false);
+        }
+
 
     }
 

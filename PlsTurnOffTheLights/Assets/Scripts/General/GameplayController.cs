@@ -10,10 +10,12 @@ public class GameplayController : MonoBehaviour
     public static GameplayController instance;              //Static instance of GameManager which allows it to be accessed by any other script.
     public string twitchName;
     public bool paused;
-    private float transitTime = 2.0f;
+    public float transitTime;
+
     //private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
     private int levelIndex;
-    private int maxIndex = 12;                                 //Current level build index
+    private int maxIndex = 11;
+    private float localTimer;                              //Current level build index
 
     void Awake()
     {
@@ -32,9 +34,7 @@ public class GameplayController : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        //Get a component reference to the attached BoardManager script
-        //boardScript = GetComponent<BoardManager>();
-
+        localTimer = transitTime;
     }
 
     private void FixedUpdate()
@@ -49,9 +49,9 @@ public class GameplayController : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "LvCompleteScene")
         {
-            transitTime -= Time.deltaTime;
+            localTimer -= Time.deltaTime;
         }
-        if (transitTime <= 0)
+        if (localTimer <= 0)
         {
             if (levelIndex < maxIndex)
                 SceneManager.LoadScene(levelIndex + 1);
@@ -59,7 +59,7 @@ public class GameplayController : MonoBehaviour
             {
                 SceneManager.LoadScene("MenuScene");
             }
-            transitTime = 2.0f;
+            localTimer = transitTime;
         }
     }
 
