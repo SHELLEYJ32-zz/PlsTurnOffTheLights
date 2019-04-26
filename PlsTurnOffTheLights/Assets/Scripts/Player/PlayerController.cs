@@ -15,10 +15,13 @@ public class PlayerController : MonoBehaviour
     public PolygonCollider2D monsterCollider;
     public CircleCollider2D interactCollider;
     public Animator animator;
+    public AudioSource footstepSound;
+    public AudioSource loseLifeSound;
 
     private Rigidbody2D playerRB;
     private float interactLocalTimer;
     private float monsterLocalTimer;
+    private float deathLocalTimer;
     private bool caught;
     private bool inLight;
 
@@ -51,12 +54,14 @@ public class PlayerController : MonoBehaviour
             GetComponent<CircleCollider2D>().enabled = false;
         }
 
+        //interact
         if (Input.GetKeyDown("space"))
         {
             //reset timer
             interactLocalTimer = interactTimer;
             Interact();
         }
+
 
         //flip
         if (playerRB.velocity.x > 0)
@@ -105,6 +110,9 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         playerRB.velocity = new Vector2(moveHorizontal * playerSpeed, moveVertical * playerSpeed);
+
+        if (Mathf.Abs(moveHorizontal) > 0 || Mathf.Abs(moveVertical) > 0)
+            footstepSound.Play();
 
         //max speed constrained
         playerRB.velocity = Vector2.ClampMagnitude(playerRB.velocity, playerSpeed);
@@ -165,6 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHP - 1 > 0)
         {
+            loseLifeSound.Play();
             playerHP--;
             monsterLocalTimer = monsterCaughtTime;
         }
@@ -179,6 +188,7 @@ public class PlayerController : MonoBehaviour
     //trigger death
     void Die()
     {
+        playerRB.constraints = RigidbodyConstraints2D.FreezePosition;
         SceneManager.LoadScene("GameOverScene");
     }
 

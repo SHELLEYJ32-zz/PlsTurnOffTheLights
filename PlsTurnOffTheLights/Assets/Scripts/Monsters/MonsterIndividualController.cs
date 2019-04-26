@@ -10,6 +10,8 @@ public class MonsterIndividualController : MonoBehaviour
     public float tempDisappearTime;
     public float attractiveRadius;
     public CircleCollider2D bodyCollider;
+    public AudioSource attackSound;
+    public AudioSource deathSound;
 
     private Rigidbody2D monsterRB;
     private float driftChangeTimer = 3.0f;
@@ -166,12 +168,14 @@ public class MonsterIndividualController : MonoBehaviour
     //catch the player if it touches the player
     private void Catch()
     {
+        attackSound.Play();
         //play animation
     }
 
     //disappear when surrounded by light
     public void Disappear()
     {
+        deathSound.Play();
         transform.position = birthPlace;
         gameObject.SetActive(false);
     }

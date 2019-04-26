@@ -9,6 +9,7 @@ public class SwitchController : MonoBehaviour
     //temp var
     public Material onMat;
     public Material offMat;
+    public AudioSource clickSound;
 
     private bool switchIsOn;
 
@@ -39,6 +40,7 @@ public class SwitchController : MonoBehaviour
         else
             GetComponent<MeshRenderer>().material = onMat;
         switchIsOn = !switchIsOn;
+        clickSound.Play();
     }
 
 }

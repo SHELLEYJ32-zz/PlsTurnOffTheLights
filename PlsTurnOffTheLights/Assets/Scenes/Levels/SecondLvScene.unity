@@ -224,11 +224,11 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3408914}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3408917
+--- !u!114 &3408917 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5290375282476902544, guid: b0edd7fbb3fbc49f290bef6a747d580c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3408914}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3408915}
   m_Enabled: 1
@@ -236,10 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a986f6789b9a8485fa9206fec56baee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  on: {fileID: 0}
-  off: {fileID: 0}
-  onMat: {fileID: 2100000, guid: 3e9ca10f3a59548bf97d5e7f75f19370, type: 2}
-  offMat: {fileID: 2100000, guid: d0db53ce479a6406dab9f79f06713e0d, type: 2}
 --- !u!60 &3408918
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -874,11 +870,11 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 256951710}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &256951713
+--- !u!114 &256951713 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5290375282476902544, guid: b0edd7fbb3fbc49f290bef6a747d580c,
+    type: 3}
+  m_PrefabInstance: {fileID: 256951710}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256951711}
   m_Enabled: 1
@@ -886,10 +882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a986f6789b9a8485fa9206fec56baee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  on: {fileID: 0}
-  off: {fileID: 0}
-  onMat: {fileID: 2100000, guid: 3e9ca10f3a59548bf97d5e7f75f19370, type: 2}
-  offMat: {fileID: 2100000, guid: d0db53ce479a6406dab9f79f06713e0d, type: 2}
 --- !u!60 &256951714
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1032,11 +1024,11 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 262764978}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &262764981
+--- !u!114 &262764981 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5290375282476902544, guid: b0edd7fbb3fbc49f290bef6a747d580c,
+    type: 3}
+  m_PrefabInstance: {fileID: 262764978}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262764980}
   m_Enabled: 1
@@ -1044,10 +1036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a986f6789b9a8485fa9206fec56baee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  on: {fileID: 0}
-  off: {fileID: 0}
-  onMat: {fileID: 2100000, guid: 3e9ca10f3a59548bf97d5e7f75f19370, type: 2}
-  offMat: {fileID: 2100000, guid: d0db53ce479a6406dab9f79f06713e0d, type: 2}
 --- !u!60 &262764982
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1500,11 +1488,11 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 444526246}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &444526249
+--- !u!114 &444526249 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5290375282476902544, guid: b0edd7fbb3fbc49f290bef6a747d580c,
+    type: 3}
+  m_PrefabInstance: {fileID: 444526246}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444526248}
   m_Enabled: 1
@@ -1512,10 +1500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a986f6789b9a8485fa9206fec56baee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  on: {fileID: 0}
-  off: {fileID: 0}
-  onMat: {fileID: 2100000, guid: 3e9ca10f3a59548bf97d5e7f75f19370, type: 2}
-  offMat: {fileID: 2100000, guid: d0db53ce479a6406dab9f79f06713e0d, type: 2}
 --- !u!60 &444526250
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3921,9 +3905,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.7259485}
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 7.725948
 --- !u!1001 &574992319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4091,9 +4075,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.90743524}
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 7.9074345
 --- !u!1001 &617576324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6870,11 +6854,11 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1840060410}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1840060413
+--- !u!114 &1840060413 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5290375282476902544, guid: b0edd7fbb3fbc49f290bef6a747d580c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1840060410}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840060412}
   m_Enabled: 1
@@ -6882,10 +6866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a986f6789b9a8485fa9206fec56baee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  on: {fileID: 0}
-  off: {fileID: 0}
-  onMat: {fileID: 2100000, guid: 3e9ca10f3a59548bf97d5e7f75f19370, type: 2}
-  offMat: {fileID: 2100000, guid: d0db53ce479a6406dab9f79f06713e0d, type: 2}
 --- !u!60 &1840060414
 PolygonCollider2D:
   m_ObjectHideFlags: 0
