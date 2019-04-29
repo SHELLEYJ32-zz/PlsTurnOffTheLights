@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/OptionScene.unity
     guid: d380d8bf8979741d6af0c3551bbf500f
   - enabled: 1
+    path: Assets/Scenes/CreditScene.unity
+    guid: 125e30764002e424481fab589b781aba
+  - enabled: 1
     path: Assets/Scenes/TwitchInputScene.unity
     guid: 102dc8e4aa24e4f75b67d661ce5924b0
   - enabled: 1

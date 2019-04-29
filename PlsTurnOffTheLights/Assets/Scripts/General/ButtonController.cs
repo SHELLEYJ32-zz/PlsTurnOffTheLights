@@ -10,6 +10,11 @@ public class ButtonController : MonoBehaviour
         SceneManager.LoadScene("InstructionScene");
     }
 
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("CreditScene");
+    }
+
     public void LoadTwitchSetting()
     {
         SceneManager.LoadScene("TwitchInputScene");
