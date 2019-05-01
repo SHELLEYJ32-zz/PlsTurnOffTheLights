@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public float playerSpeed;
     public int playerHP;
     public float monsterCaughtTime;
-    public float interactTimer;
     public PolygonCollider2D wallCollider;
     public PolygonCollider2D monsterCollider;
     public CircleCollider2D interactCollider;
@@ -21,21 +20,18 @@ public class PlayerController : MonoBehaviour
     public Material hurtMat;
 
     private Rigidbody2D playerRB;
-    private float interactLocalTimer;
     private float monsterLocalTimer;
-    private float deathLocalTimer;
     private bool caught;
     private bool inLight;
 
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
-        GetComponent<CircleCollider2D>().enabled = false;
+        interactCollider.enabled = false;
         GetComponent<SpriteRenderer>().material = normalMat;
         caught = false;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         Move();
@@ -49,22 +45,16 @@ public class PlayerController : MonoBehaviour
                 monsterLocalTimer -= Time.deltaTime;
         }
 
-        //if interact, count down interact time 
-        if (interactLocalTimer > 0)
-            interactLocalTimer -= Time.deltaTime;
-        else
-        {
-            GetComponent<CircleCollider2D>().enabled = false;
-        }
-
         //interact
         if (Input.GetKeyDown("space"))
         {
-            //reset timer
-            interactLocalTimer = interactTimer;
-            Interact();
+            interactCollider.enabled = true;
         }
 
+        if (Input.GetKeyUp("space"))
+        {
+            interactCollider.enabled = false;
+        }
 
         //flip
         if (playerRB.velocity.x > 0)
@@ -77,24 +67,10 @@ public class PlayerController : MonoBehaviour
 
         if (Mathf.Abs(playerRB.velocity.x) <= 0)
         {
-            if (playerRB.velocity.y < 0)
-            {
-                animator.SetBool("static", false);
-                animator.SetBool("verticalDown", true);
-                animator.SetBool("verticalUp", false);
-            }
-            else if (playerRB.velocity.y > 0)
-            {
-                animator.SetBool("static", false);
-                animator.SetBool("verticalDown", false);
-                animator.SetBool("verticalUp", true);
-            }
-            else
-            {
-                animator.SetBool("static", true);
-                animator.SetBool("verticalDown", false);
-                animator.SetBool("verticalUp", false);
-            }
+            animator.SetBool("static", Mathf.Abs(playerRB.velocity.x) <= 0 && Mathf.Abs(playerRB.velocity.y) <= 0);
+            animator.SetBool("verticalDown", playerRB.velocity.y < 0);
+            animator.SetBool("verticalUp", playerRB.velocity.y > 0);
+
         }
         else
         {
@@ -119,12 +95,6 @@ public class PlayerController : MonoBehaviour
 
         //max speed constrained
         playerRB.velocity = Vector2.ClampMagnitude(playerRB.velocity, playerSpeed);
-    }
-
-    //interact with objects around
-    void Interact()
-    {
-        GetComponent<CircleCollider2D>().enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -185,6 +155,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerHP--;
+            GetComponent<SpriteRenderer>().material = hurtMat;
+            loseLifeSound.Play();
             Die();
         }
 

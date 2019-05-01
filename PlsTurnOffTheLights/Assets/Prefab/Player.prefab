@@ -635,7 +635,6 @@ MonoBehaviour:
   playerSpeed: 3
   playerHP: 3
   monsterCaughtTime: 0.5
-  interactTimer: 0.3
   wallCollider: {fileID: 1528794070}
   monsterCollider: {fileID: 1528794072}
   interactCollider: {fileID: 1528794073}

@@ -9,9 +9,10 @@ public class MonsterIndividualController : MonoBehaviour
     public float twitchEffectiveTime;
     public float tempDisappearTime;
     public float attractiveRadius;
-    public CircleCollider2D bodyCollider;
+    public PolygonCollider2D bodyCollider;
     public AudioSource attackSound;
     public AudioSource deathSound;
+    public Animator animator;
 
     private Rigidbody2D monsterRB;
     private float driftChangeTimer = 3.0f;
@@ -90,6 +91,25 @@ public class MonsterIndividualController : MonoBehaviour
             //Debug.Log("abort");
         }
 
+        //flip
+        if (monsterRB.velocity.x > 0)
+            GetComponent<SpriteRenderer>().flipX = true;
+        else
+            GetComponent<SpriteRenderer>().flipX = false;
+
+        //set animator
+        animator.SetBool("Horizontal", Mathf.Abs(monsterRB.velocity.x) > 0);
+
+        if (Mathf.Abs(monsterRB.velocity.x) <= 0)
+        {
+            animator.SetBool("verticalDown", monsterRB.velocity.y < 0);
+            animator.SetBool("verticalUp", monsterRB.velocity.y > 0);
+        }
+        else
+        {
+            animator.SetBool("verticalDown", false);
+            animator.SetBool("verticalUp", false);
+        }
     }
 
     //drift randomly within dark space
@@ -111,6 +131,7 @@ public class MonsterIndividualController : MonoBehaviour
 
             monsterRB.velocity = new Vector2(moveChanceX * originalMonsterSpeed, moveChanceY * originalMonsterSpeed);
             monsterRB.velocity = Vector2.ClampMagnitude(monsterRB.velocity, originalMonsterSpeed);
+
         }
         else
         {
@@ -194,7 +215,7 @@ public class MonsterIndividualController : MonoBehaviour
         deathSound.Play();
         GetComponent<ParticleSystem>().Play();
         GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<CircleCollider2D>().enabled = false;
+        bodyCollider.enabled = false;
         disappearLocalTimer = disappearTimer;
         disappearFlag = true;
     }
@@ -202,7 +223,7 @@ public class MonsterIndividualController : MonoBehaviour
     //move based on twitch command
     public void TwitchMove(string direction)
     {
-        //if no command is received
+        //if command is received
         if (direction != "")
         {
             twitchFlag = true;
@@ -233,6 +254,7 @@ public class MonsterIndividualController : MonoBehaviour
             }
 
             monsterRB.velocity = new Vector2(moveChanceX * twitchMonsterSpeed, moveChanceY * twitchMonsterSpeed);
+
         }
         //Debug.Log("twitch command received");
     }
