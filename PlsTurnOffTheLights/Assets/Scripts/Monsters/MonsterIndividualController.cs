@@ -21,6 +21,9 @@ public class MonsterIndividualController : MonoBehaviour
     private GameObject signalPrefab;
     private GameObject signalDisplay;
     private bool chaseFlag;
+    private bool disappearFlag;
+    private float disappearTimer = 2.0f;
+    private float disappearLocalTimer;
     private GameObject player;
     private int moveChanceX;
     private int moveChanceY;
@@ -40,7 +43,20 @@ public class MonsterIndividualController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!twitchFlag && !chaseFlag)
+        if (disappearFlag)
+        {
+            if (disappearLocalTimer > 0)
+                disappearLocalTimer -= Time.deltaTime;
+            else
+            {
+                disappearFlag = false;
+                disappearLocalTimer = disappearTimer;
+                transform.position = birthPlace;
+                gameObject.SetActive(false);
+            }
+
+        }
+        else if (!twitchFlag && !chaseFlag)
         {
             Drift();
         }
@@ -63,7 +79,7 @@ public class MonsterIndividualController : MonoBehaviour
         bool closeEnough = Vector2.Distance(transform.position, player.transform.position) <= attractiveRadius;
         bool playerInLight = player.GetComponent<PlayerController>().InLight();
 
-        if (!twitchFlag && !playerInLight && closeEnough)
+        if (!disappearFlag && !twitchFlag && !playerInLight && closeEnough)
         {
             Chase(true);
             //Debug.Log("chase");
@@ -176,8 +192,11 @@ public class MonsterIndividualController : MonoBehaviour
     public void Disappear()
     {
         deathSound.Play();
-        transform.position = birthPlace;
-        gameObject.SetActive(false);
+        GetComponent<ParticleSystem>().Play();
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
+        disappearLocalTimer = disappearTimer;
+        disappearFlag = true;
     }
 
     //move based on twitch command

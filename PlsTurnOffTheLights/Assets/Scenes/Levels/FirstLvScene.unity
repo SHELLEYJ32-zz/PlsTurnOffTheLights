@@ -254,16 +254,16 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 167f64b764d294a82a3955982efaca6c, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.04, y: 1.55}
+    newSize: {x: 2.04, y: 1.55}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -593,16 +593,16 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 167f64b764d294a82a3955982efaca6c, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.04, y: 1.55}
+    newSize: {x: 2.04, y: 1.55}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -1058,22 +1058,22 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -1093,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -3861,16 +3861,16 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 167f64b764d294a82a3955982efaca6c, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.04, y: 1.55}
+    newSize: {x: 2.04, y: 1.55}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -4562,22 +4562,22 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -4597,7 +4597,7 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -4656,16 +4656,16 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 167f64b764d294a82a3955982efaca6c, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.04, y: 1.55}
+    newSize: {x: 2.04, y: 1.55}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -10550,22 +10550,22 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -10585,7 +10585,7 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -20439,7 +20439,7 @@ Transform:
   m_GameObject: {fileID: 2089414867}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 15.21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -20681,12 +20681,12 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -20706,7 +20706,7 @@ PrefabInstance:
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578869646150303017, guid: b0edd7fbb3fbc49f290bef6a747d580c,
         type: 3}
@@ -20849,6 +20849,16 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 167f64b764d294a82a3955982efaca6c, type: 2}
+    - target: {fileID: 260582294092839763, guid: d320c2b0642804f499552d459f0dad53,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6372505037631047841, guid: d320c2b0642804f499552d459f0dad53,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d320c2b0642804f499552d459f0dad53, type: 3}
 --- !u!4 &4048630819241640294 stripped

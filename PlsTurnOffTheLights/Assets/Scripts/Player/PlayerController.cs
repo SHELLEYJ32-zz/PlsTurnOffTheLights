@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public AudioSource footstepSound;
     public AudioSource loseLifeSound;
+    public Material normalMat;
+    public Material hurtMat;
 
     private Rigidbody2D playerRB;
     private float interactLocalTimer;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody2D>();
         GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().material = normalMat;
         caught = false;
     }
 
@@ -156,6 +159,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Monster" && caught)
         {
             caught = false;
+            GetComponent<SpriteRenderer>().material = normalMat;
         }
         if (collision.gameObject.tag == "Light")
         {
@@ -173,6 +177,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHP - 1 > 0)
         {
+            GetComponent<SpriteRenderer>().material = hurtMat;
             loseLifeSound.Play();
             playerHP--;
             monsterLocalTimer = monsterCaughtTime;

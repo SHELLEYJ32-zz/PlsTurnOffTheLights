@@ -604,7 +604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 69.3}
+  m_AnchoredPosition: {x: 0, y: 64.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800343084
@@ -644,11 +644,9 @@ MonoBehaviour:
 
     Press Space to activate a light switch
 
-    Avoid the monsters
+    Turn off all the lights in the rooms
 
-    Turn off all the lights in the room
-
-'
+    Avoid the monsters, or annihilate thwm'
 --- !u!222 &1800343085
 CanvasRenderer:
   m_ObjectHideFlags: 0

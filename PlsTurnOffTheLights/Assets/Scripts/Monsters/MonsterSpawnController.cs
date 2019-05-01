@@ -27,6 +27,8 @@ public class MonsterSpawnController : MonoBehaviour
             {
                 if (individualTimer[i] <= 0)
                 {
+                    monsters[i].GetComponent<SpriteRenderer>().enabled = true;
+                    monsters[i].GetComponent<CircleCollider2D>().enabled = true;
                     monsters[i].SetActive(true);
                     individualTimer[i] = regenerateTimer;
                 }

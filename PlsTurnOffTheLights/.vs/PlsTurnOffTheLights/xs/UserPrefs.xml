@@ -1,17 +1,14 @@
 ﻿<Properties StartupConfiguration="{0C161043-173F-0CA7-C771-303DF34EC733}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/General/ButtonController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Monsters/MonsterIndividualController.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="170" Column="1" />
-      <File FileName="Assets/Scripts/General/GameplayController.cs" Line="15" Column="52" />
-      <File FileName="Assets/Scripts/Monsters/MonsterIndividualController.cs" Line="24" Column="31" />
-      <File FileName="Assets/Scripts/Lights/LightController.cs" Line="27" Column="1" />
-      <File FileName="Assets/Scripts/Monsters/MonsterSpawnController.cs" Line="27" Column="14" />
-      <File FileName="Assets/Scripts/General/ButtonController.cs" Line="22" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="153" Column="28" />
+      <File FileName="Assets/Scripts/Lights/SwitchController.cs" Line="40" Column="27" />
+      <File FileName="Assets/Scripts/Monsters/MonsterIndividualController.cs" Line="45" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="905f40e9-fadb-4072-ae6e-833d7959b48c" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="52c94ddb-3802-4e2f-af31-0bf9af250283" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

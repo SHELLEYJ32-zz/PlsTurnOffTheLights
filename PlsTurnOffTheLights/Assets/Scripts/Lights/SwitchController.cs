@@ -6,9 +6,6 @@ public class SwitchController : MonoBehaviour
 {
     public Sprite on;
     public Sprite off;
-    //temp var
-    public Material onMat;
-    public Material offMat;
     public AudioSource clickSound;
 
     private bool switchIsOn;
@@ -16,7 +13,7 @@ public class SwitchController : MonoBehaviour
     void Start()
     {
         switchIsOn = true;
-        GetComponent<MeshRenderer>().material = onMat;
+        GetComponent<SpriteRenderer>().sprite = on;
     }
 
     //return switch state
@@ -36,9 +33,9 @@ public class SwitchController : MonoBehaviour
     private void ChangeState()
     {
         if (switchIsOn)
-            GetComponent<MeshRenderer>().material = offMat;
+            GetComponent<SpriteRenderer>().sprite = off;
         else
-            GetComponent<MeshRenderer>().material = onMat;
+            GetComponent<SpriteRenderer>().sprite = on;
         switchIsOn = !switchIsOn;
         clickSound.Play();
     }
